@@ -1,0 +1,227 @@
+.navbar{
+    width: 100%;
+    height: 3%;
+    top:0;
+    display: inline-block;
+        
+}
+
+.navbar-item{
+    font-family: "Courier New", monospace;
+     font-size: 20px;
+     text-align: center;
+    float: left;
+    padding: 5px;
+    margin-left: 15%; 
+}
+
+.navbar-item>a{
+    text-decoration: none;
+}
+.navbar-item:hover .navbar-languages{
+    background-color: grey;
+
+}
+.navbar-languages{
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    width: 110px;   
+    height: 30px;
+    margin: 5px;
+    padding: 5px;
+    margin-left: 75%;
+    border-style: solid;
+    border-color: black;
+    border-radius: 15px;
+    border-width: 1px;
+    
+}
+
+.name{
+     font-family: "Courier New", monospace;
+     font-size: 40px;
+     text-align: center;
+}
+.navbar-languages>a{
+    padding: 6px;
+}
+.mySlides {
+    display:none;
+
+
+    }
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+
+.buy_button{
+    text-decoration: none;
+    font-family: "Courier New", monospace;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    top: 300px;
+    right:230px;
+    width: 200px;
+    height: 50px;
+    background-color: #FB6F74;
+}
+.buy_button:hover{
+    text-decoration: none;
+    background-color: #FDB7B9;
+}
+.img_box{
+     
+}
+
+.c-tabs-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", monospace;
+  font-size: 17px;
+}
+.c-tabs-nav>a{
+    text-decoration: none;
+}
+
+
+.c-tabs-nav__link {
+  flex: 1;
+  margin-right: 4px;
+  padding: 12px;
+  color: #000;
+ 
+  text-align: center;
+  transition: color 0.3s;
+  
+}
+
+.c-tabs-nav__link:last-child {
+  margin-right: 0;
+}
+
+.c-tabs-nav__link:hover {
+  color: #6d6d6d;
+}
+
+.c-tabs-nav__link.is-active {
+  color: #dc446e;
+  background-color: #ffffff;
+}
+
+.c-tabs-nav__link i,
+.c-tabs-nav__link span {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.c-tabs-nav__link i {
+  font-size: 18px;
+}
+
+.c-tabs-nav__link span {
+  display: none;
+  font-size: 18px;
+}
+
+@media all and (min-width: 720px) {
+  .c-tabs-nav__link i {
+ margin-bottom: 12px;
+ font-size: 22px;
+  }
+  .c-tabs-nav__link span {
+ display: block;
+  }
+}
+
+.c-tab {
+  display: none;
+  background-color: #ffffff;
+  
+}
+
+.c-tab.is-active {
+  
+  display: block;
+  
+  margin-left: 3%;
+
+}
+
+.c-tab__content {
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  padding: 1.5rem;
+  
+
+}
+
+.footer{
+ height: 15%;
+ font-family: "Courier New", monospace;
+ padding-left: 10%;
+}
+.footer_row{
+    display: inline-block;
+}
+.table> a{
+    text-decoration: none;
+}
+
+
+
+* {box-sizing: border-box;}
+.product-item {
+    float: left;
+    width: 300px;
+    text-align: center;
+    margin: 10px;
+    border-bottom: 2px solid #F5F5F5;
+    background: white;
+    font-family: "Open Sans";
+    transition: .3s ease-in;
+}
+.product-page{
+    margin-left:14%;
+}
+.product-item:hover {border-bottom: 2px solid #fc5a5a;}
+.product-item img {
+    display: block;
+    width: 100%;
+}
+.product-list {
+    background: #fafafa;
+    padding: 15px 0;
+
+}
+.product-list h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #444444;
+    margin: 0 0 10px 0;
+}
+.price {
+    font-size: 16px;
+    color: #fc5a5a;
+    display: block;
+    margin-bottom: 12px;
+}
+.button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 12px;
+    background: #cccccc;
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 28px;
+    transition: .3s ease-in;
+}
+.product-item:hover .button {background: #fc5a5a;}
+
+.tab{
+    font-size: 15px;
+}
