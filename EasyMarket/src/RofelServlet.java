@@ -86,7 +86,16 @@ public class RofelServlet extends HttpServlet {
                 "        </div>\n" +
                 "    </div>\n" +
                 "    <div class = \"buy_button\">\n" +
-                "            <a href=\"#\" style = \"text-decoration: none\">"+myres.getString("buy_button")+"</a>\n" +
+                "            <a href=\"#\" style = \"text-decoration: none\">"+"" +
+                "<a href=\"#openModal\">"+myres.getString("buy_button")+"</a>\n" +
+                "<div id=\"openModal\" class=\"modalDialog\">\n" +
+                "    <div>\n" +
+                "        <a href=\"#close\" title=\"Закрыть\" class=\"close\">X</a>\n" +
+                "        <h2>Модальное окно</h2>\n" +
+                "        <p>Пример простого модального окна, которое может быть создано с использованием CSS3.</p>\n" +
+                "        <p>Его можно использовать в широком диапазоне, начиная от вывода сообщений и заканчивая формой регистрации.</p>\n" +
+                "    </div>\n" +
+                "</div>"+"</a>\n" +
                 "    </div>\n" +
                 "</div>\n" +
                 "\n" +

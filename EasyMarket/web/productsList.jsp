@@ -45,17 +45,7 @@
 
     ResourceBundle myres = ResourceBundle.getBundle("locale/locales", locale);
 
-    Cookie[] cookies = request.getCookies();
 
-    /*for(int i = 0; i<cookies.length; i++) {
-
-        if (cookies[i].getName().equals("min")) {
-            minInt = Integer.parseInt(cookies[i].getValue());
-        }
-        if (cookies[i].getName().equals("max")) {
-            maxInt = Integer.parseInt(cookies[i].getValue());
-        }
-    }*/
 %>
     <div class="navbar">
         <div href="#" class="navbar-item">
@@ -84,32 +74,68 @@
         }
     </script>
             <%
-                   if(request.getParameter("min") != null && request.getParameter("max") != null) {
+               /* Cookie[] cookies = request.getCookies();
+
+                if(cookies.length >1) {
+                    for (int i = 0; i < cookies.length; i++) {
+
+                        if (cookies[i].getName().equals("min")) {
+                            minInt = Integer.parseInt(cookies[i].getValue());
+                            System.out.println("cookies");
+                        }
+                        if (cookies[i].getName().equals("max")) {
+                            maxInt = Integer.parseInt(cookies[i].getValue());
+                        }
+                    }
+                } else {
+                    if(request.getParameter("min") != null && request.getParameter("max") != null) {
+                        String min = request.getParameter("min");
+                        String max = request.getParameter("max");
+                        minInt = Integer.parseInt(min);
+                        maxInt = Integer.parseInt(max);
+                    }
+                }
+                    ArrayList<Product> ls = new ArrayList<Product>();
+
+                    for (Product pr : productsList.getList()) {
+
+                        if (pr.getPrice() >= minInt && pr.getPrice() <= maxInt) {
+                            ls.add(pr);
+                        }
+                    }
+
+                    filtredPage = true;
 
 
-                       String min = request.getParameter("min");
-                       String max = request.getParameter("max");
-                       minInt = Integer.parseInt(min);
-                       maxInt = Integer.parseInt(max);
 
+                       javax.servlet.http.Cookie cookie1 = new Cookie("min", request.getParameter("min"));
+                       javax.servlet.http.Cookie cookie2 = new Cookie("max", request.getParameter("max"));
+                       response.addCookie(cookie1);
+                       response.addCookie(cookie2);
 
-                       ArrayList<Product> ls = new ArrayList<Product>();
+*/
 
-                       for (Product pr : productsList.getList()) {
-
-                           if (pr.getPrice() >= minInt && pr.getPrice() <= maxInt) {
-                               ls.add(pr);
-                           }
-                       }
-                       filtredPage = true;
-                       filtredList.setList(ls);
-                   } else {
-                       filtredPage = false;
-                   }
+                if(request.getParameter("min") != null && request.getParameter("max") != null) {
+                    String min = request.getParameter("min");
+                    String max = request.getParameter("max");
+                    minInt = Integer.parseInt(min);
+                    maxInt = Integer.parseInt(max);
+                    ArrayList<Product> ls = new ArrayList<Product>();
+                    for (Product pr : productsList.getList()) {
+                        if (pr.getPrice() >= minInt && pr.getPrice() <= maxInt) {
+                            ls.add(pr);
+                        }
+                    }
+                    filtredPage = true;
+                    filtredList.setList(ls);
+                } else {
+                    filtredPage = false;
+                }
                 javax.servlet.http.Cookie cookie1 = new Cookie("min", request.getParameter("min"));
                 javax.servlet.http.Cookie cookie2 = new Cookie("max", request.getParameter("max"));
                 response.addCookie(cookie1);
                 response.addCookie(cookie2);
+
 
 
             %>
@@ -126,6 +152,7 @@
 <%
     if(filtredPage == false) {
 %>
+
 <c:forEach var = "item" items = "${productsList.list}">
     <jsp:include page="productCard.jsp">
         <jsp:param name="id" value = "${item.id}"/>
