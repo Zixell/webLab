@@ -13,14 +13,22 @@
 
 </head>
 
-<div class="product-item">
-  <img src="gta5card.png">
-  <div class="product-list">
-    <h3>Grand theft auto V</h3>
-    <span class="price">₽ 1999</span>
-    <a href = "/RofelServlet" for="zayavka" class="button">Подробнее</a>
+<div class="navbar">
+  <div href="#" class="navbar-item">
+    <a href = "#">SneakShop</a>
+    <a href = "#" style = "font-size: 15px;">Cart</a>
+    <a href = "#" style = "font-size: 15px;">History</a>
+    <a href = "#" style = "font-size: 15px;">Sigh in</a>
+  </div>
+  <div class = "navbar-languages">
+    <a href="?lang=ru">ru</a>
+    <a href="?lang=en">en</a>
+    <a href="?lang=es">es</a>
   </div>
 </div>
+<hr>
+
+<a href = "http://localhost:8080/productsList.jsp">GO LIST</a>
 
 <script src="javascript.js"></script>
 <script>

@@ -9,11 +9,11 @@ import java.util.Arrays;
  */
 public class ListOfProducts implements Serializable{
     private ArrayList<Product> list = new ArrayList<Product>(Arrays.asList(
-            new Product("EQT 93/17 SUPPORT", 9000, "img/eqt9317_2.jpg"),
-            new Product("EQT 93/17 SUPPORT", 7000, "img/eqt 9317 black.jpg"),
-            new Product("SNEAKER BOOT", 6000, "img/sneakerboost.jpg"),
-            new Product("JEANS SUPER", 5000, "img/jeans super.jpg"),
-            new Product("PARLEY EQT", 8000, "img/parley eqt.jpg")
+            new Product("1","EQT 93/17 SUPPORT", 9000, "img/eqt9317_2.jpg", "img/eqt9317_1.jpg", "img/eqt9317.jpg","shortDes","shortDes1","shortDes2", "full1", "full2", "full3","reviews"),
+            new Product("2","EQT 93/17 SUPPORT", 7000, "img/eqt 9317 black.jpg", "img/eqt 9317 black_1.jpg","img/eqt 9317 black_2.jpg","shortDes","shortDes1","shortDes2", "full1", "full2", "full3","reviews"),
+            new Product("3","SNEAKER BOOT", 6000, "img/sneakerboost.jpg","img/sneakerboost_1.jpg","img/sneakerboost_2.jpg","shortDes","shortDes1","shortDes2", "full1", "full2", "full3","reviews"),
+            new Product("4","JEANS SUPER", 5000, "img/jeans super.jpg", "img/jeans super_1.jpg","img/jeans super_2.jpg","shortDes","shortDes1","shortDes2", "full1", "full2", "full3","reviews"),
+            new Product("5","PARLEY EQT", 8000, "img/parley eqt.jpg", "img/parley eqt_1.jpg","img/parley eqt_2.jpg","shortDes","shortDes1","shortDes2", "full1", "full2", "full3","reviews")
     ));
 
     public ArrayList<Product> getList(){

@@ -1,3 +1,6 @@
+import javaClasses.ListOfProducts;
+import javaClasses.Product;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,17 @@ public class RofelServlet extends HttpServlet {
 
         Locale locale = Locale.ENGLISH;
         String s = request.getParameter("lang");
+        String ID = request.getParameter("id");
+        Product pr = new Product();
+        if(ID != null) {
+            ListOfProducts a = new ListOfProducts();
+
+            for(int i = 0; i < a.getList().size(); i++){
+                if(a.getList().get(i).getId().equals(ID)){
+                    pr = a.getList().get(i);
+                }
+            }
+        }
         if(s != null) {
             if (s.equals("ru")) {
                 locale = Locale.forLanguageTag("ru");
@@ -39,26 +53,30 @@ public class RofelServlet extends HttpServlet {
                 "   \n" +
                 "</head>\n" +
                 "\n" +
-                "<body>\n" +
-                "        <div class=\"navbar\">\n" +
-                "            <div href=\"#\" class=\"navbar-item\">\n" +
-                "                <a href = \"productCard.jsp\">" + myres.getString("home")+"</a>\n" +
-                "            </div> \n" +
-                "            <div class = \"navbar-languages\">\n" +
-                "                <a href=\"?lang=ru\">ru</a>  \n" +
-                "                <a href=\"?lang=en\">en</a>\n" +
-                "                <a href=\"?lang=es\">es</a>\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "        <hr>\n" +
-                "        <div class=\"name\">\n" + myres.getString("product_name")+
+                "<body>\n"+
+                "<div class=\"navbar\">"+"\n" +
+                "<div href=\"#\" class=\"navbar-item\">"+"\n" +
+                    "<a href = \"productsList.jsp\">SneakShop</a>"+"\n" +
+                    "<a href = \"#\" style = \"font-size: 15px;\">"+myres.getString("cart")+"</a>"+"\n" +
+                    "<a href = \"#\" style = \"font-size: 15px;\">"+myres.getString("history")+"</a>"+"\n" +
+                    "<a href = \"#\" style = \"font-size: 15px;\">"+myres.getString("signin")+"</a>"+"\n" +
+                "</div>"+
+                 "       <div class = \"navbar-languages\">"+"\n" +
+                  "          <a href=\"?id="+pr.getId()+"&lang=ru\">ru</a>"+"\n" +
+                   "         <a href=\"?id="+pr.getId()+"&lang=en\">en</a>"+"\n" +
+                    "        <a href=\"?id="+pr.getId()+"&lang=es\">es</a>"+"\n" +
+                     "   </div>"+"\n" +
+                    "</div>"+"\n" +
+                "<hr>" +"\n" +
+
+                "        <div class=\"name\">\n" + pr.getName() +
                 "            \n" +
                 "        </div>\n" +
                 "<div class = \"img_box\">     \n" +
                 "    <div class=\"w3-content w3-display-container\" style=\"max-width:500px\" style=\"margin-top: 50px\">\n" +
-                "                <img class=\"mySlides\" src=\"img/eqt9317.jpg\" style=\"width:100%\">\n" +
-                "                <img class=\"mySlides\" src=\"img/eqt9317_1.jpg\" style=\"width:100%\">\n" +
-                "                <img class=\"mySlides\" src=\"img/eqt9317_2.jpg\" style=\"width:100%\">\n" +
+                "                <img class=\"mySlides\" src=\""+pr.getPath(0)+"\" style=\"width:100%\">\n" +
+                "                <img class=\"mySlides\" src=\""+pr.getPath(1)+"\" style=\"width:100%\">\n" +
+                "                <img class=\"mySlides\" src=\""+pr.getPath(2)+"\" style=\"width:100%\">\n" +
                 "        <div class=\"w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle\" style=\"width:100%\">\n" +
                 "            <div class=\"w3-left w3-hover-text-khaki\" onclick=\"plusDivs(-1)\">&#10094;</div>\n" +
                 "            <div class=\"w3-right w3-hover-text-khaki\" onclick=\"plusDivs(1)\">&#10095;</div>\n" +
@@ -83,21 +101,15 @@ public class RofelServlet extends HttpServlet {
                 "                </div>\n" +
                 "                \n" +
                 "                <div class=\"c-tab is-active\">\n" +
-                "                    <div class=\"c-tab__content\">"+myres.getString("short_des_content")+"</div>\n" +
+                "                    <div class=\"c-tab__content\">"+pr.getShortDes(s)+"</div>\n" +
                 "                </div>\n" +
                 "                <div class=\"c-tab\">\n" +
-                "                    <div class=\"c-tab__content\">\n" +
-                "                        &bull; "+myres.getString("full_des_content_1")+"<br>\n" +
-                "                        &bull; "+myres.getString("full_des_content_2")+"<br>\n" +
-                "                        &bull; "+myres.getString("full_des_content_3")+"<br>\n" +
-                "                        &bull; "+myres.getString("full_des_content_4")+"<br>\n" +
-                "                        &bull; "+myres.getString("full_des_content_5")+"<br>\n" +
-                "                        &bull; "+myres.getString("full_des_content_6")+"<br>\n" +
-                "                        &bull; "+myres.getString("full_des_content_7")+"\n" +
+                "                    <div class=\"c-tab__content\">\n" +pr.getFullDes(s)+
+
                 "                    </div>\n" +
                 "                </div>\n" +
                 "                <div class=\"c-tab\">\n" +
-                "                    <div class=\"c-tab__content\">"+myres.getString("reviews_content")+"\n" +
+                "                    <div class=\"c-tab__content\">"+"\n" +pr.getReviews()+
                 "\n" +
                 "                    </div>\n" +
                 "                </div>\n" +
