@@ -27,8 +27,28 @@
 
 <body>
 <%! int minInt;
-    int maxInt; %>
+    int maxInt;
+     Cookie cookieMin = null;
+     Cookie cookieMax = null;%>
 <%
+    Cookie[] cookies = request.getCookies();
+    for (Cookie cookie :
+            cookies) {
+        if ("min".equals(cookie.getName())) {
+            cookieMin = cookie;
+        }
+        if ("max".equals(cookie.getName())) {
+            cookieMax = cookie;
+        }
+    }
+
+    if(cookieMin==null && cookieMax==null) {
+        cookieMin = new Cookie("min", request.getParameter("min"));
+        response.addCookie(cookieMin);
+        cookieMax = new Cookie("max", request.getParameter("max"));
+        response.addCookie(cookieMax);
+    }
+
     Locale locale = Locale.ENGLISH;
     String s = request.getParameter("lang");
     if(s != null) {
@@ -115,11 +135,16 @@
 
 */
 
-                if(request.getParameter("min") != null && request.getParameter("max") != null) {
+                if(request.getParameter("min") !=  null && request.getParameter("max") != null) {
                     String min = request.getParameter("min");
                     String max = request.getParameter("max");
-                    minInt = Integer.parseInt(min);
-                    maxInt = Integer.parseInt(max);
+                    if (!min.equals("") && !max.equals("")) {
+                        minInt = Integer.parseInt(min);
+                        maxInt = Integer.parseInt(max);
+                    } else {
+                        minInt = Integer.parseInt(cookieMin.getValue());
+                        maxInt = Integer.parseInt(cookieMax.getValue());
+                    }
                     ArrayList<Product> ls = new ArrayList<Product>();
                     for (Product pr : productsList.getList()) {
                         if (pr.getPrice() >= minInt && pr.getPrice() <= maxInt) {
@@ -129,14 +154,8 @@
                     filtredPage = true;
                     filtredList.setList(ls);
                 } else {
-                    filtredPage = false;
+
                 }
-                javax.servlet.http.Cookie cookie1 = new Cookie("min", request.getParameter("min"));
-                javax.servlet.http.Cookie cookie2 = new Cookie("max", request.getParameter("max"));
-                response.addCookie(cookie1);
-                response.addCookie(cookie2);
-
-
 
             %>
 
