@@ -29,7 +29,8 @@
 <%! int minInt;
     int maxInt;
      Cookie cookieMin = null;
-     Cookie cookieMax = null;%>
+     Cookie cookieMax = null;
+    boolean cancel = false;%>
 <%
     Cookie[] cookies = request.getCookies();
     for (Cookie cookie :
@@ -93,47 +94,8 @@
             }
         }
     </script>
+
             <%
-               /* Cookie[] cookies = request.getCookies();
-
-                if(cookies.length >1) {
-                    for (int i = 0; i < cookies.length; i++) {
-
-                        if (cookies[i].getName().equals("min")) {
-                            minInt = Integer.parseInt(cookies[i].getValue());
-                            System.out.println("cookies");
-                        }
-                        if (cookies[i].getName().equals("max")) {
-                            maxInt = Integer.parseInt(cookies[i].getValue());
-                        }
-                    }
-                } else {
-                    if(request.getParameter("min") != null && request.getParameter("max") != null) {
-                        String min = request.getParameter("min");
-                        String max = request.getParameter("max");
-                        minInt = Integer.parseInt(min);
-                        maxInt = Integer.parseInt(max);
-                    }
-                }
-                    ArrayList<Product> ls = new ArrayList<Product>();
-
-                    for (Product pr : productsList.getList()) {
-
-                        if (pr.getPrice() >= minInt && pr.getPrice() <= maxInt) {
-                            ls.add(pr);
-                        }
-                    }
-
-                    filtredPage = true;
-
-
-
-                       javax.servlet.http.Cookie cookie1 = new Cookie("min", request.getParameter("min"));
-                       javax.servlet.http.Cookie cookie2 = new Cookie("max", request.getParameter("max"));
-                       response.addCookie(cookie1);
-                       response.addCookie(cookie2);
-
-*/
 
                 if(request.getParameter("min") !=  null && request.getParameter("max") != null) {
                     String min = request.getParameter("min");
@@ -164,11 +126,26 @@
     <%=myres.getString("filter")%>
     <input type="number" size="20" id="min">
     <input type="number" size="20" id="max">
-    <input type="submit" id="filter_button" onclick="return AlertValue(this)" value="Accept">
+    <input type="submit" id="filter_button" class="filter_button" onclick="return AlertValue(this)" value="<%=myres.getString("accept")%>">
+    <input type="submit" id="nofilter" class="nofilter" onclick="cancelFilter(this)" value="X">
 </div>
 <div class="field">
 <%-- HERE WAS CARD HTML --%>
+    <script>
+        function cancelFilter() {
+            if(document.getElementById("nofilter").onclick){
+                window.location = 'productsList.jsp?filter=cancel';
+            }
+
+        }
+    </script>
+
+
 <%
+    if(request.getParameter("filter")!=null && request.getParameter("filter").equals("cancel")){
+        filtredPage = false;
+    }
+
     if(filtredPage == false) {
 %>
 
