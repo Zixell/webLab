@@ -70,7 +70,7 @@
 %>
     <div class="navbar">
         <div href="#" class="navbar-item">
-            <a href = "#">SneakShop</a>
+            <a href = "productsList.jsp">SneakShop</a>
             <a href = "#" style = "font-size: 15px;"><%=myres.getString("cart")%></a>
             <a href = "#" style = "font-size: 15px;"><%=myres.getString("history")%></a>
             <a href = "#" style = "font-size: 15px;"><%=myres.getString("signin")%></a>
@@ -124,8 +124,8 @@
 
 <div class="filter">
     <%=myres.getString("filter")%>
-    <input type="number" size="20" id="min">
-    <input type="number" size="20" id="max">
+    <input type="number" size="10" id="min">
+    <input type="number" size="10" id="max">
     <input type="submit" id="filter_button" class="filter_button" onclick="return AlertValue(this)" value="<%=myres.getString("accept")%>">
     <input type="submit" id="nofilter" class="nofilter" onclick="cancelFilter(this)" value="X">
 </div>
