@@ -13,6 +13,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
@@ -26,6 +27,12 @@
 </head>
 
 <body>
+<script>
+
+    if(window.location != 'http://localhost:8080/productsList.jsp'){
+        window.location = 'productsList.jsp';
+    }
+</script>
 <%! int minInt;
     int maxInt;
      Cookie cookieMin = null;
@@ -50,38 +57,41 @@
         response.addCookie(cookieMax);
     }
 
-    Locale locale = Locale.ENGLISH;
-    String s = request.getParameter("lang");
-    if(s != null) {
-        if (s.equals("ru")) {
-            locale = Locale.forLanguageTag("ru");
-        } else if (s.equals("en")) {
-            locale = Locale.forLanguageTag("en");
-        } else if (s.equals("es")) {
-            locale = Locale.forLanguageTag("es");
-        }
-    } else {
-        locale = Locale.ENGLISH;
-    }
-
-    ResourceBundle myres = ResourceBundle.getBundle("locale/locales", locale);
+//    Locale locale = Locale.ENGLISH;
+//    String s = (String) session.getAttribute("locale");
+//    if(s != null) {
+//        if (s.equals("ru")) {
+//            locale = Locale.forLanguageTag("ru");
+//        } else if (s.equals("en")) {
+//            locale = Locale.forLanguageTag("en");
+//        } else if (s.equals("es")) {
+//            locale = Locale.forLanguageTag("es");
+//        }
+//    } else {
+//        locale = Locale.ENGLISH;
+//    }
+//
+//    ResourceBundle myres = ResourceBundle.getBundle("locale/locales", locale);
 
 
 %>
-    <div class="navbar">
-        <div href="#" class="navbar-item">
-            <a href = "productsList.jsp">SneakShop</a>
-            <a href = "#" style = "font-size: 15px;"><%=myres.getString("cart")%></a>
-            <a href = "#" style = "font-size: 15px;"><%=myres.getString("history")%></a>
-            <a href = "#" style = "font-size: 15px;"><%=myres.getString("signin")%></a>
-        </div>
-        <div class = "navbar-languages">
-            <a href="?lang=ru">ru</a>
-            <a href="?lang=en">en</a>
-            <a href="?lang=es">es</a>
-        </div>
-    </div>
-<hr>
+<c:if test="${empty sessionScope.locale}">
+    <fmt:setLocale value="en"/>
+</c:if>
+<c:if test="${sessionScope.locale eq 'ru'}">
+    <fmt:setLocale value="ru"/>
+</c:if>
+<c:if test="${sessionScope.locale eq 'en'}">
+    <fmt:setLocale value="en"/>
+</c:if>
+<c:if test="${sessionScope.locale eq 'es'}">
+    <fmt:setLocale value="es"/>
+</c:if>
+<fmt:setBundle basename="locale/locales"/>
+
+
+<jsp:include page="header.jsp"/>
+
     <%! boolean filtredPage = false; %>
     <script>
         function AlertValue(Element) {
@@ -123,10 +133,10 @@
 
 
 <div class="filter">
-    <%=myres.getString("filter")%>
+    <fmt:message key="filter"/>
     <input type="number" size="10" id="min">
     <input type="number" size="10" id="max">
-    <input type="submit" id="filter_button" class="filter_button" onclick="return AlertValue(this)" value="<%=myres.getString("accept")%>">
+    <input type="submit" id="filter_button" class="filter_button" onclick="return AlertValue(this)" value="<fmt:message key="accept"/>">
     <input type="submit" id="nofilter" class="nofilter" onclick="cancelFilter(this)" value="X">
 </div>
 <div class="field">
@@ -153,13 +163,14 @@
     <jsp:include page="productCard.jsp">
         <jsp:param name="id" value = "${item.id}"/>
         <jsp:param name="name" value = "${item.name}"/>
-        <jsp:param name="price" value="${item.price}"/>
+        <jsp:param name="price" value="${item.getPrice(sessionScope.locale)}"/>
         <jsp:param name="path" value="${item.path}"/>
     </jsp:include>
 </c:forEach>
 <%
     } else {
 %>
+    <div class="filter_info"><fmt:message key="filter"/>: <fmt:message key="from"/> <%=minInt%> <fmt:message key="to"/> <%=maxInt%></div>
     <c:forEach var = "item" items = "${filtredList.list}">
         <jsp:include page="productCard.jsp">
             <jsp:param name="id" value = "${item.id}"/>
@@ -173,30 +184,7 @@
 </div>
 <hr>
 
-<div class = "footer">
-           <table class="w3-table" style="text-decoration: none">
-                <tr>
-                        <th><%=myres.getString("help")%></th>
-                        <th><%=myres.getString("info")%>"</th>
-                        <th><%=myres.getString("about")%>"</th>
-                </tr>
-                <tr>
-                        <td><a href = "#"><%=myres.getString("shipping")%></a></td>
-                        <td><a href = "#"><%=myres.getString("sizes")%></a></td>
-                        <td><a href = "#"><%=myres.getString("us")%></a></td>
-                </tr>
-                <tr>
-                        <td><a href = "#"><%=myres.getString("payment")%></a></td>
-                        <td><a href = "#"><%=myres.getString("care")%></a></td>
-                        <td><a href = "#"><%=myres.getString("vacancies")%></a></td>
-                </tr>
-                <tr>
-                        <td><a href = "#"><%=myres.getString("ordering")%></a></td>
-
-                        <td><a href = "#"><%=myres.getString("shops")%></a></td>
-                </tr>
-            </table>
-         </div>
+<jsp:include page="footer.jsp"/>
 
 </body>
 </html>

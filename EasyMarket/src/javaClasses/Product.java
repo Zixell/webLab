@@ -21,6 +21,15 @@ public class Product {
         return price;
     }
 
+    public int getPrice(String lang){
+        if (lang != null) {
+            if (lang.equals("ru")) return price;
+            if (lang.equals("en")) return price/58;
+            if (lang.equals("es")) return price/67;
+        }
+        return price/58;
+    }
+
     public String getPath(){
         return pathToImg[0];
     }

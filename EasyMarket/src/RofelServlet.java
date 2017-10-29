@@ -21,8 +21,12 @@ public class RofelServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Locale locale = Locale.ENGLISH;
+        String value = getInitParameter("ex");
+        int par = Integer.parseInt(value);
         String s = request.getParameter("lang");
         String ID = request.getParameter("id");
+        String re = request.getRequestURL().toString()+"?id="+ID;
+        System.out.println(re);
         Product pr = new Product();
         if(ID != null) {
             ListOfProducts a = new ListOfProducts();
@@ -57,14 +61,14 @@ public class RofelServlet extends HttpServlet {
                 "<div class=\"navbar\">"+"\n" +
                 "<div href=\"#\" class=\"navbar-item\">"+"\n" +
                     "<a href = \"productsList.jsp\">SneakShop</a>"+"\n" +
-                    "<a href = \"#\" style = \"font-size: 15px;\">"+myres.getString("cart")+"</a>"+"\n" +
+                    "<a href = \"cart.jsp\" style = \"font-size: 15px;\">"+myres.getString("cart")+"</a>"+"\n" +
                     "<a href = \"#\" style = \"font-size: 15px;\">"+myres.getString("history")+"</a>"+"\n" +
                     "<a href = \"#\" style = \"font-size: 15px;\">"+myres.getString("signin")+"</a>"+"\n" +
                 "</div>"+
                  "       <div class = \"navbar-languages\">"+"\n" +
-                  "          <a href=\"?id="+pr.getId()+"&lang=ru\">ru</a>"+"\n" +
-                   "         <a href=\"?id="+pr.getId()+"&lang=en\">en</a>"+"\n" +
-                    "        <a href=\"?id="+pr.getId()+"&lang=es\">es</a>"+"\n" +
+                  "          <a href=\"/changerLocale?lang=ru&re="+re+"\">ru</a>"+"\n" +
+                   "         <a href=\"/changerLocale?lang=en&re="+re+"&lang=en\">en</a>"+"\n" +
+                    "        <a href=\"/changerLocale?lang=es&re="+re+"&lang=es\">es</a>"+"\n" +
                      "   </div>"+"\n" +
                     "</div>"+"\n" +
                 "<hr>" +"\n" +
@@ -91,9 +95,10 @@ public class RofelServlet extends HttpServlet {
                 "<div id=\"openModal\" class=\"modalDialog\">\n" +
                 "    <div>\n" +
                 "        <a href=\"#close\" title=\"Закрыть\" class=\"close\">X</a>\n" +
-                "        <h2>Модальное окно</h2>\n" +
-                "        <p>Пример простого модального окна, которое может быть создано с использованием CSS3.</p>\n" +
-                "        <p>Его можно использовать в широком диапазоне, начиная от вывода сообщений и заканчивая формой регистрации.</p>\n" +
+                "         <p> Вы не авторизованы!</p>"+
+                "        <a href=\"cartList?add=1&id="+pr.getId()+"\">"+myres.getString("addToCart")+"</a>\n" +
+                "        \n" +
+                "        \n" +
                 "    </div>\n" +
                 "</div>"+"</a>\n" +
                 "    </div>\n" +
@@ -158,7 +163,8 @@ public class RofelServlet extends HttpServlet {
                 "    tabContentContainers: '.c-tab'\n" +
                 "  });\n" +
                 "\n" +
-                "  myTabs.init();\n" +
+                "  myTabs.init();" +
+                " myTabs.goToTab("+par+");\n" +
                 "</script>\n" +
                 "</body>";
 

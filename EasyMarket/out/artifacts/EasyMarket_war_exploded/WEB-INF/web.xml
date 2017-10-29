@@ -8,12 +8,30 @@
         <servlet-class>RofelServlet</servlet-class>
         <init-param>
             <param-name>ex</param-name>
-            <param-value>ex</param-value>
+            <param-value>0</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>RofelServlet</servlet-name>
         <url-pattern>/RofelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>cart</servlet-name>
+        <servlet-class>cartList</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>locale</servlet-name>
+        <url-pattern>/changerLocale</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>locale</servlet-name>
+        <servlet-class>changerLocale</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cart</servlet-name>
+        <url-pattern>/cartList</url-pattern>
     </servlet-mapping>
 
 

@@ -155,18 +155,47 @@
   font-family: "Courier New", monospace;
   font-size: 20px;
   padding: 1.5rem;
-  
+    margin-left:10%;
+    margin-right: 10%;
 
 }
 .filter{
     font-family: "Courier New", monospace;
     font-size: 14px;
 }
-
+.c-tabs-nav{
+    margin-left:10%;
+    margin-right: 10%;
+}
 .footer{
  height: 15%;
  font-family: "Courier New", monospace;
- padding-left: 10%;
+
+    margin-left:10%;
+    margin-right: 10%;
+}
+.cartItem{
+    font-family: "Courier New", monospace;
+    background: #ffffff; /* Цвет фона */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    padding: 10px;
+    margin-top:15px;
+    margin-left:10%;
+    margin-right: 10%;
+    height: 240px;
+}
+.cartCost{
+    margin-top: 30px;
+    margin-left: 70%;
+    font-family: "Courier New", monospace;
+    font-size: 21px;
+    width: 300px;
+}
+.filter_info{
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    float: right;
+    margin-right: 10px;
 }
 .footer_row{
     display: inline-block;

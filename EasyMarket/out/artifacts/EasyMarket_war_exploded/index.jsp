@@ -12,20 +12,7 @@
   <link rel = "stylesheet" href = "style.css">
 
 </head>
-
-<div class="navbar">
-  <div href="#" class="navbar-item">
-    <a href = "#">SneakShop</a>
-    <a href = "#" style = "font-size: 15px;">Cart</a>
-    <a href = "#" style = "font-size: 15px;">History</a>
-    <a href = "#" style = "font-size: 15px;">Sigh in</a>
-  </div>
-  <div class = "navbar-languages">
-    <a href="?lang=ru">ru</a>
-    <a href="?lang=en">en</a>
-    <a href="?lang=es">es</a>
-  </div>
-</div>
+<jsp:include page="header.jsp"></jsp:include>
 <hr>
 
 <a href = "http://localhost:8080/productsList.jsp">GO LIST</a>
