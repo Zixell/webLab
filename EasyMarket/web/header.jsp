@@ -60,7 +60,14 @@
         <a href = "productsList.jsp">SneakShop</a>
         <a href = "cart.jsp" style = "font-size: 15px;"><fmt:message key="cart"/></a>
         <a href = "#" style = "font-size: 15px;"><fmt:message key="history"/></a>
-        <a href = "#" style = "font-size: 15px;"><fmt:message key="signin"/></a>
+        <%
+            if(request.isUserInRole("tomcat")){
+        %>
+        <a href="/profile.jsp"><%=request.getUserPrincipal().getName()%></a>
+        <a href="/logout">logout</a>
+        <%}else {%>
+        <a href = "/MyProfile" style = "font-size: 15px;"><fmt:message key="signin"/></a>
+        <%}%>
     </div>
     <div class = "navbar-languages">
         <a href="/changerLocale?lang=ru&re=${pageContext.request.requestURL}">ru</a>

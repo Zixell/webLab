@@ -95,7 +95,7 @@ public class RofelServlet extends HttpServlet {
                 "<div id=\"openModal\" class=\"modalDialog\">\n" +
                 "    <div>\n" +
                 "        <a href=\"#close\" title=\"Закрыть\" class=\"close\">X</a>\n" +
-                "         <p> Вы не авторизованы!</p>"+
+                "         <p> Вы не авторизованы!\"</p>"+
                 "        <a href=\"cartList?add=1&id="+pr.getId()+"\">"+myres.getString("addToCart")+"</a>\n" +
                 "        \n" +
                 "        \n" +

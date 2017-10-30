@@ -21,6 +21,8 @@ public class cartList extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+
         Locale locale = Locale.ENGLISH;
         String s = request.getParameter("lang");
         if(s != null) {

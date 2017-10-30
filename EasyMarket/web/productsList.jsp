@@ -119,7 +119,7 @@
                     }
                     ArrayList<Product> ls = new ArrayList<Product>();
                     for (Product pr : productsList.getList()) {
-                        if (pr.getPrice() >= minInt && pr.getPrice() <= maxInt) {
+                        if (pr.getPrice((String) session.getAttribute("locale")) >= minInt && pr.getPrice((String) session.getAttribute("locale")) <= maxInt) {
                             ls.add(pr);
                         }
                     }
@@ -175,7 +175,7 @@
         <jsp:include page="productCard.jsp">
             <jsp:param name="id" value = "${item.id}"/>
             <jsp:param name="name" value = "${item.name}"/>
-            <jsp:param name="price" value="${item.price}"/>
+            <jsp:param name="price" value="${item.getPrice(sessionScope.locale)}"/>
             <jsp:param name="path" value="${item.path}"/>
         </jsp:include>
     </c:forEach>
