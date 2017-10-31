@@ -27,51 +27,15 @@
 </head>
 
 <body>
-<script>
 
-    if(window.location != 'http://localhost:8080/productsList.jsp'){
-        window.location = 'productsList.jsp';
-    }
-</script>
 <%! int minInt;
     int maxInt;
      Cookie cookieMin = null;
      Cookie cookieMax = null;
     boolean cancel = false;%>
 <%
-    Cookie[] cookies = request.getCookies();
-    for (Cookie cookie :
-            cookies) {
-        if ("min".equals(cookie.getName())) {
-            cookieMin = cookie;
-        }
-        if ("max".equals(cookie.getName())) {
-            cookieMax = cookie;
-        }
-    }
 
-    if(cookieMin==null && cookieMax==null) {
-        cookieMin = new Cookie("min", request.getParameter("min"));
-        response.addCookie(cookieMin);
-        cookieMax = new Cookie("max", request.getParameter("max"));
-        response.addCookie(cookieMax);
-    }
 
-//    Locale locale = Locale.ENGLISH;
-//    String s = (String) session.getAttribute("locale");
-//    if(s != null) {
-//        if (s.equals("ru")) {
-//            locale = Locale.forLanguageTag("ru");
-//        } else if (s.equals("en")) {
-//            locale = Locale.forLanguageTag("en");
-//        } else if (s.equals("es")) {
-//            locale = Locale.forLanguageTag("es");
-//        }
-//    } else {
-//        locale = Locale.ENGLISH;
-//    }
-//
-//    ResourceBundle myres = ResourceBundle.getBundle("locale/locales", locale);
 
 
 %>
@@ -105,31 +69,7 @@
         }
     </script>
 
-            <%
 
-                if(request.getParameter("min") !=  null && request.getParameter("max") != null) {
-                    String min = request.getParameter("min");
-                    String max = request.getParameter("max");
-                    if (!min.equals("") && !max.equals("")) {
-                        minInt = Integer.parseInt(min);
-                        maxInt = Integer.parseInt(max);
-                    } else {
-                        minInt = Integer.parseInt(cookieMin.getValue());
-                        maxInt = Integer.parseInt(cookieMax.getValue());
-                    }
-                    ArrayList<Product> ls = new ArrayList<Product>();
-                    for (Product pr : productsList.getList()) {
-                        if (pr.getPrice((String) session.getAttribute("locale")) >= minInt && pr.getPrice((String) session.getAttribute("locale")) <= maxInt) {
-                            ls.add(pr);
-                        }
-                    }
-                    filtredPage = true;
-                    filtredList.setList(ls);
-                } else {
-
-                }
-
-            %>
 
 
 <div class="filter">
@@ -150,27 +90,58 @@
         }
     </script>
 
+    <%
 
-<%
-    if(request.getParameter("filter")!=null && request.getParameter("filter").equals("cancel")){
-        filtredPage = false;
-    }
+        if(request.getParameter("min") !=  null && request.getParameter("max") != null) {
+            String min = request.getParameter("min");
+            String max = request.getParameter("max");
+            minInt = Integer.parseInt(min);
+            maxInt = Integer.parseInt(max);
+            javax.servlet.http.Cookie cookie1 = new Cookie("min", min);
+            response.addCookie(cookie1);
+            javax.servlet.http.Cookie cookie2 = new Cookie("max", max);
+            response.addCookie(cookie2);
+        } else {
+                Cookie[] cookies = request.getCookies();
+                System.out.println(cookies);
+                if(cookies != null) {
+                    for (Cookie cookie :
+                            cookies) {
+                        if ("min".equals(cookie.getName())) {
+                            cookieMin = cookie;
+                            System.out.println(cookieMin.getValue());
+                        } else {
 
-    if(filtredPage == false) {
-%>
+                        }
+                        if ("max".equals(cookie.getName())) {
+                            cookieMax = cookie;
+                            System.out.println(cookieMax.getValue());
+                        } else{
 
-<c:forEach var = "item" items = "${productsList.list}">
-    <jsp:include page="productCard.jsp">
-        <jsp:param name="id" value = "${item.id}"/>
-        <jsp:param name="name" value = "${item.name}"/>
-        <jsp:param name="price" value="${item.getPrice(sessionScope.locale)}"/>
-        <jsp:param name="path" value="${item.path}"/>
-    </jsp:include>
-</c:forEach>
-<%
-    } else {
-%>
-    <div class="filter_info"><fmt:message key="filter"/>: <fmt:message key="from"/> <%=minInt%> <fmt:message key="to"/> <%=maxInt%></div>
+                        }
+                    }
+                    minInt = Integer.parseInt(cookieMin.getValue());
+                    maxInt = Integer.parseInt(cookieMax.getValue());
+                } else {
+                    javax.servlet.http.Cookie cookie1 = new Cookie("min", "0");
+                    response.addCookie(cookie1);
+                    javax.servlet.http.Cookie cookie2 = new Cookie("max", "9999999");
+                    response.addCookie(cookie2);
+
+                }
+
+            }
+
+        ArrayList<Product> ls = new ArrayList<Product>();
+        for (Product pr : productsList.getList()) {
+            if (pr.getPrice((String) session.getAttribute("locale")) >= minInt && pr.getPrice((String) session.getAttribute("locale")) <= maxInt) {
+                ls.add(pr);
+            }
+        }
+
+        filtredList.setList(ls);
+        if(filtredList.getList() != null && request.getParameter("filter") == null){
+    %>
     <c:forEach var = "item" items = "${filtredList.list}">
         <jsp:include page="productCard.jsp">
             <jsp:param name="id" value = "${item.id}"/>
@@ -179,8 +150,24 @@
             <jsp:param name="path" value="${item.path}"/>
         </jsp:include>
     </c:forEach>
+    <div class="filter_info"><fmt:message key="filter"/>: <fmt:message key="from"/> <%=minInt%> <fmt:message key="to"/> <%=maxInt%></div>
 
-<%}%>
+    <%
+    } else {%>
+    <c:forEach var = "item" items = "${productsList.list}">
+        <jsp:include page="productCard.jsp">
+            <jsp:param name="id" value = "${item.id}"/>
+            <jsp:param name="name" value = "${item.name}"/>
+            <jsp:param name="price" value="${item.getPrice(sessionScope.locale)}"/>
+            <jsp:param name="path" value="${item.path}"/>
+        </jsp:include>
+    </c:forEach>
+    <%
+
+        }
+
+    %>
+
 </div>
 <hr>
 
