@@ -109,19 +109,20 @@
                             cookies) {
                         if ("min".equals(cookie.getName())) {
                             cookieMin = cookie;
-                            System.out.println(cookieMin.getValue());
+                            if(cookie.getValue() != "") minInt = Integer.parseInt(cookieMin.getValue());
+
                         } else {
 
                         }
                         if ("max".equals(cookie.getName())) {
                             cookieMax = cookie;
-                            System.out.println(cookieMax.getValue());
+                            if(cookie.getValue() != "") maxInt = Integer.parseInt(cookieMax.getValue());
                         } else{
 
                         }
                     }
-                    minInt = Integer.parseInt(cookieMin.getValue());
-                    maxInt = Integer.parseInt(cookieMax.getValue());
+
+
                 } else {
                     javax.servlet.http.Cookie cookie1 = new Cookie("min", "0");
                     response.addCookie(cookie1);
@@ -140,7 +141,10 @@
         }
 
         filtredList.setList(ls);
-        if(filtredList.getList() != null && request.getParameter("filter") == null){
+        if(request.getParameter("filter") != null) {
+            filtredList.setList(null);
+        }
+        if(filtredList.getList() != null){
     %>
     <c:forEach var = "item" items = "${filtredList.list}">
         <jsp:include page="productCard.jsp">

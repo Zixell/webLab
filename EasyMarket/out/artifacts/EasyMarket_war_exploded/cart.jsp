@@ -74,7 +74,7 @@
         </c:forEach>
         <div class="order">
             <div class="cartCost"><fmt:message key="cartPrice"></fmt:message><fmt:message key="sign"/>${sessionScope.cartList.cartCost(sessionScope.locale)}</div>
-            <div class="order_button" style="float: right;">
+            <div class="order_button" style="">
                 <a href="order.jsp">ORDER</a>
             </div>
         </div>

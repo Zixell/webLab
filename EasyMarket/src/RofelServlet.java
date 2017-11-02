@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
@@ -22,11 +23,14 @@ public class RofelServlet extends HttpServlet {
 
         Locale locale = Locale.ENGLISH;
         String value = getInitParameter("ex");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("init", value);
+
         int par = Integer.parseInt(value);
         String s = request.getParameter("lang");
         String ID = request.getParameter("id");
         String re = request.getRequestURL().toString()+"?id="+ID;
-        System.out.println(re);
         Product pr = new Product();
         if(ID != null) {
             ListOfProducts a = new ListOfProducts();
