@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>RofelServlet</servlet-name>
-        <servlet-class>RofelServlet</servlet-class>
+        <servlet-class>servlets.RofelServlet</servlet-class>
         <init-param>
             <param-name>ex</param-name>
             <param-value>1</param-value>
@@ -20,22 +20,23 @@
         <servlet-class>cartList</servlet-class>
 
     </servlet>
+    <servlet>
+        <servlet-name>locale</servlet-name>
+        <servlet-class>servlets.changerLocale</servlet-class>
+
+    </servlet>
     <servlet-mapping>
         <servlet-name>locale</servlet-name>
         <url-pattern>/changerLocale</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>locale</servlet-name>
-        <servlet-class>changerLocale</servlet-class>
 
-    </servlet>
     <servlet-mapping>
         <servlet-name>cart</servlet-name>
         <url-pattern>/cartList</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>logout</servlet-name>
-        <servlet-class>logout</servlet-class>
+        <servlet-class>servlets.logout</servlet-class>
 
     </servlet>
     <servlet-mapping>
@@ -43,11 +44,53 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MyProfile</servlet-name>
+        <servlet-class>servlets.MyProfile</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyProfile</servlet-name>
+        <url-pattern>/MyProfile</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>CommentsServlet</servlet-name>
+        <servlet-class>servlets.CommentsServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Comments</servlet-name>
+        <url-pattern>/Comments</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Comments</servlet-name>
+        <servlet-class>Comments</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentsServlet</servlet-name>
+        <url-pattern>/CommentsServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentHandler</servlet-name>
+        <servlet-class>servlets.CommentHandler</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentHandler</servlet-name>
+        <url-pattern>/CommentHandler</url-pattern>
+    </servlet-mapping>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>CartInfo</web-resource-name>
             <url-pattern>/MyProfile</url-pattern>
             <url-pattern>/order.jsp</url-pattern>
+            <url-pattern>/history.jsp</url-pattern>
             <http-method>POST</http-method>
             <http-method>GET</http-method>
         </web-resource-collection>

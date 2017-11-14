@@ -1,5 +1,7 @@
 <%@ page import="java.util.ResourceBundle" %>
-<%@ page import="java.util.Locale" %><%--
+<%@ page import="java.util.Locale" %>
+<%@ page import="javaClasses.*" %>
+<%--
   Created by IntelliJ IDEA.
   User: Roman Zhuravlev
   Date: 01.10.2017
@@ -42,7 +44,7 @@
         ${param.price}
 
       </span>
-      <a href = "/RofelServlet?id=${param.id}&lang=<%=session.getAttribute("locale")%>" for="zayavka" class="button"><fmt:message key="more"/> </a>
+      <a href = "/RofelServlet?id=${param.id}&lang=<%=session.getAttribute("locale")%>&size=${sessionScope.cartList.list.size()}" for="zayavka" class="button"><fmt:message key="more"/> </a>
     </div>
   </div>
 

@@ -50,12 +50,6 @@
     </c:when>
     <c:otherwise>
         <c:forEach varStatus="curr" var="item" items="${sessionScope.cartList.list}">
-            <%--<script>--%>
-                <%--var q = ${item.count};--%>
-                <%--if(q == '0'){--%>
-                    <%--window.location='/cartList?add=delete&id='+uid;--%>
-                <%--}--%>
-            <%--</script>--%>
             <div class = "cartItem">
                 <script> uid = ${item.product.getId()};</script>
                 <div style="float: left; margin: 10px;"><img src="${item.product.getPath()}" width="200" height="200" style=""></div>
@@ -66,16 +60,13 @@
                     <a href="/cartList?add=0&id=${item.product.getId()}" onclick="">-</a>
                         ${item.count}
                     <a href="/cartList?add=1&id=${item.product.getId()}" onclick="">+</a>
-
                 </div>
-
-
             </div>
         </c:forEach>
         <div class="order">
             <div class="cartCost"><fmt:message key="cartPrice"></fmt:message><fmt:message key="sign"/>${sessionScope.cartList.cartCost(sessionScope.locale)}</div>
             <div class="order_button" style="">
-                <a href="order.jsp">ORDER</a>
+                <a href="order.jsp"><fmt:message key="order"/> </a>
             </div>
         </div>
 

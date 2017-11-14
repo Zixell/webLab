@@ -38,7 +38,6 @@ public class cartLop implements Serializable{
     public void delete(String id) {
         for(int i = 0; i < this.list.size(); i++) {
             if (this.list.get(i).getProduct().getId().equals(id)){
-                System.out.println(this.list.get(i).getProduct().getName());
                     this.list.remove(i);
                 }
             }

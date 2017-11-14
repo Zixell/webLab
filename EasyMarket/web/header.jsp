@@ -4,6 +4,7 @@
 <%@ page import="javaClasses.Product" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.util.ResourceBundle" %>
+<%@ page import="javaClasses.*" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -15,32 +16,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 
 </head>
 <body>
-<%--<%--%>
-<%--Locale locale = Locale.ENGLISH;--%>
-<%--String s = request.getParameter("lang");--%>
-<%--if(s != null) {--%>
-<%--if (s.equals("ru")) {--%>
-<%--locale = Locale.forLanguageTag("ru");--%>
-<%--} else if (s.equals("en")) {--%>
-<%--locale = Locale.forLanguageTag("en");--%>
-<%--} else if (s.equals("es")) {--%>
-<%--locale = Locale.forLanguageTag("es");--%>
-<%--}--%>
-<%--} else {--%>
-<%--locale = Locale.ENGLISH;--%>
-<%--}--%>
-
-<%--ResourceBundle myres = ResourceBundle.getBundle("locale/locales", locale);--%>
-
-
-<%--%>--%>
 <c:if test="${empty sessionScope.locale}">
     <fmt:setLocale value="en"/>
 </c:if>
@@ -58,16 +38,29 @@
 <div class="navbar">
     <div href="#" class="navbar-item">
         <a href = "productsList.jsp">SneakShop</a>
-        <a href = "cart.jsp" style = "font-size: 15px;"><fmt:message key="cart"/></a>
-        <a href = "#" style = "font-size: 15px;"><fmt:message key="history"/></a>
+        <a href = "cart.jsp" style = "font-size: 15px;"><fmt:message key="cart"/>
+            <c:choose>
+                <c:when test="${empty sessionScope.cartList.list}">
+                    (0)
+                </c:when>
+                <c:otherwise>
+                    (${sessionScope.cartList.list.size()})
+                </c:otherwise>
+            </c:choose>
+        </a>
+        <a href = "history.jsp" style = "font-size: 15px;"><fmt:message key="history"/></a>
         <%
             if(request.isUserInRole("tomcat")){
+                if(session.getAttribute("cartList") != null){
         %>
-        <a href="/profile.jsp"><%=request.getUserPrincipal().getName()%></a>
-        <a href="/logout">logout</a>
+        <a href="/order.jsp" style = "font-size: 15px;"><fmt:message key="ordering"/>(${sessionScope.cartList.list.size()})</a>
+        <%}%>
+        <a href="/profile.jsp" style = "font-size: 15px;"><%=request.getUserPrincipal().getName()%></a>
+        <a href="/logout" style = "font-size: 15px;"><fmt:message key="logout"/> </a>
         <%}else {%>
         <a href = "/MyProfile" style = "font-size: 15px;"><fmt:message key="signin"/></a>
-        <%}%>
+        <%}
+        %>
     </div>
     <div class = "navbar-languages">
         <a href="/changerLocale?lang=ru&re=${pageContext.request.requestURL}">ru</a>

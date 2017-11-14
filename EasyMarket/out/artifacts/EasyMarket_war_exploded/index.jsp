@@ -12,7 +12,7 @@
   <link rel = "stylesheet" href = "style.css">
 
 </head>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="/header.jsp"></jsp:include>
 <hr>
 
 <a href = "http://localhost:8080/productsList.jsp">GO LIST</a>

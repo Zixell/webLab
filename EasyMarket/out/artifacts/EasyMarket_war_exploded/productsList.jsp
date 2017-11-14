@@ -32,12 +32,6 @@
     int maxInt;
      Cookie cookieMin = null;
      Cookie cookieMax = null;
-    boolean cancel = false;%>
-<%
-
-
-
-
 %>
 <c:if test="${empty sessionScope.locale}">
     <fmt:setLocale value="en"/>
@@ -56,7 +50,6 @@
 
 <jsp:include page="header.jsp"/>
 
-    <%! boolean filtredPage = false; %>
     <script>
         function AlertValue(Element) {
             var minIn = document.getElementById('min').value;
@@ -103,7 +96,6 @@
             response.addCookie(cookie2);
         } else {
                 Cookie[] cookies = request.getCookies();
-                System.out.println(cookies);
                 if(cookies != null) {
                     for (Cookie cookie :
                             cookies) {
@@ -112,13 +104,13 @@
                             if(cookie.getValue() != "") minInt = Integer.parseInt(cookieMin.getValue());
 
                         } else {
-
+                            minInt = 0;
                         }
                         if ("max".equals(cookie.getName())) {
                             cookieMax = cookie;
                             if(cookie.getValue() != "") maxInt = Integer.parseInt(cookieMax.getValue());
                         } else{
-
+                            maxInt = 99999;
                         }
                     }
 
@@ -126,9 +118,10 @@
                 } else {
                     javax.servlet.http.Cookie cookie1 = new Cookie("min", "0");
                     response.addCookie(cookie1);
-                    javax.servlet.http.Cookie cookie2 = new Cookie("max", "9999999");
+                    javax.servlet.http.Cookie cookie2 = new Cookie("max", "99999");
                     response.addCookie(cookie2);
-
+                    minInt = 0;
+                    maxInt = 99999;
                 }
 
             }
